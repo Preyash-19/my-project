@@ -18,14 +18,25 @@
 
     <section id="weather"></section>
     <section id="news"></section>
+
+    <!-- Simple login UI -->
+    <div id="authSection">
+      <h3>Login / Signup</h3>
+      <input type="email" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Sign Up</button>
+      <p id="message"></p>
+    </div>
+
+    <!-- Favorites display -->
+    <div id="favorites"></div>
+    <div class="auth-required" style="display: none;">
+      <!-- Weather and favorites content here -->
+    </div>
   </main>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js" type="module"></script>
-  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js" type="module"></script>
-
-  <!-- Main Scripts -->
-  <script type="module" src="firebase-config.js"></script>
+  <!-- Firebase + your app (module imports) -->
   <script type="module" src="app.js"></script>
 </body>
 </html>

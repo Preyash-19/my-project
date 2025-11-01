@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+</head>
+<body>
+  <h2>Login / Signup</h2>
+
+  <input id="email" type="email" placeholder="Email" /><br>
+  <input id="password" type="password" placeholder="Password" /><br>
+
+  <button id="signupBtn">Sign Up</button>
+  <button id="loginBtn">Login</button>
+  <button id="logoutBtn">Logout</button>
+
+  <p id="message" style="color: red;"></p>
+
+  <!-- ✅ Use "type=module" and import the modern Firebase SDK -->
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 🟩 Sign Up
+    document.getElementById("signupBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        document.getElementById("message").innerText = "✅ Signup successful!";
+        window.location.href = "index.html"; // redirect after signup
+      } catch (error) {
+        document.getElementById("message").innerText = "❌ " + error.message;
+        console.error(error);
+      }
+    });
+
+    // 🟦 Login
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        document.getElementById("message").innerText = "✅ Login successful!";
+        window.location.href = "index.html"; // redirect to main app
+      } catch (error) {
+        document.getElementById("message").innerText = "❌ " + error.message;
+        console.error(error);
+      }
+    });
+
+    // 🔴 Logout
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        document.getElementById("message").innerText = "👋 Logged out!";
+        window.location.href = "login.html";
+      } catch (error) {
+        document.getElementById("message").innerText = "❌ " + error.message;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather + News</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main>
+    <h1>🌤️ Weather + News</h1>
+
+    <div id="controls">
+      <input id="cityInput" placeholder="Enter city name (e.g., Mumbai)" />
+      <button id="showBtn">Show</button>
+      <button id="saveBtn">Save as Favorite</button>
+    </div>
+
+    <section id="weather"></section>
+    <section id="news"></section>
+  </main>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js" type="module"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js" type="module"></script>
+
+  <!-- Main Scripts -->
+  <script type="module" src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

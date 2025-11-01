@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather + News</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main>
-    <h1>🌤️ Weather + News</h1>
-
+    <div class="header">
+      <h1>🌤️ Weather + News</h1>
+      <button id="logoutBtn">Logout</button>
+    </div>
     <div id="controls">
-      <input id="cityInput" placeholder="Enter city name (e.g., Mumbai)" />
+      <input id="cityInput" placeholder="Enter city name (e.g., Delhi)">
       <button id="showBtn">Show</button>
       <button id="saveBtn">Save as Favorite</button>
     </div>
-
+    <section id="favorites"></section>
     <section id="weather"></section>
     <section id="news"></section>
-
-    <!-- Simple login UI -->
-    <div id="authSection">
-      <h3>Login / Signup</h3>
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button id="loginBtn">Login</button>
-      <button id="signupBtn">Sign Up</button>
-      <p id="message"></p>
-    </div>
-
-    <!-- Favorites display -->
-    <div id="favorites"></div>
-    <div class="auth-required" style="display: none;">
-      <!-- Weather and favorites content here -->
-    </div>
   </main>
-
-  <!-- Firebase + your app (module imports) -->
   <script type="module" src="app.js"></script>
 </body>
 </html>

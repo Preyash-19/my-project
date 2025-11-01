@@ -1,78 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Weather & News App</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(120deg, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center;
+      width: 320px;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      width: 45%;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
+    #loginBtn { background: #007bff; }
+    #signupBtn { background: #28a745; }
+    #logoutBtn { background: #dc3545; width: 90%; }
+    button:hover { opacity: 0.9; }
+    #message { margin-top: 10px; font-weight: bold; }
+  </style>
 </head>
 <body>
-  <h2>Login / Signup</h2>
+  <div class="container">
+    <h2>🌤️ Login / Signup</h2>
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="password" type="password" placeholder="Password" required>
+    <div>
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn">Sign Up</button>
+    </div>
+    <button id="logoutBtn">Logout</button>
+    <p id="message"></p>
+  </div>
 
-  <input id="email" type="email" placeholder="Email" /><br>
-  <input id="password" type="password" placeholder="Password" /><br>
-
-  <button id="signupBtn">Sign Up</button>
-  <button id="loginBtn">Login</button>
-  <button id="logoutBtn">Logout</button>
-
-  <p id="message" style="color: red;"></p>
-
-  <!-- ✅ Use "type=module" and import the modern Firebase SDK -->
   <script type="module">
-    // Import Firebase SDKs
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import {
-      getAuth,
-      createUserWithEmailAndPassword,
-      signInWithEmailAndPassword,
-      signOut
-    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
     import { firebaseConfig } from "./firebase-config.js";
 
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const message = document.getElementById("message");
 
-    // 🟩 Sign Up
-    document.getElementById("signupBtn").addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
+    document.getElementById("signupBtn").onclick = async () => {
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        document.getElementById("message").innerText = "✅ Signup successful!";
-        window.location.href = "index.html"; // redirect after signup
-      } catch (error) {
-        document.getElementById("message").innerText = "❌ " + error.message;
-        console.error(error);
+        await createUserWithEmailAndPassword(auth, email.value, password.value);
+        message.textContent = "✅ Signup successful!";
+        setTimeout(() => (window.location.href = "index.html"), 1000);
+      } catch (err) {
+        message.textContent = "❌ " + err.message;
       }
-    });
+    };
 
-    // 🟦 Login
-    document.getElementById("loginBtn").addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
+    document.getElementById("loginBtn").onclick = async () => {
       try {
-        await signInWithEmailAndPassword(auth, email, password);
-        document.getElementById("message").innerText = "✅ Login successful!";
-        window.location.href = "index.html"; // redirect to main app
-      } catch (error) {
-        document.getElementById("message").innerText = "❌ " + error.message;
-        console.error(error);
+        await signInWithEmailAndPassword(auth, email.value, password.value);
+        message.textContent = "✅ Login successful!";
+        setTimeout(() => (window.location.href = "index.html"), 1000);
+      } catch (err) {
+        message.textContent = "❌ " + err.message;
       }
-    });
+    };
 
-    // 🔴 Logout
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      try {
-        await signOut(auth);
-        document.getElementById("message").innerText = "👋 Logged out!";
-        window.location.href = "login.html";
-      } catch (error) {
-        document.getElementById("message").innerText = "❌ " + error.message;
-      }
-    });
+    document.getElementById("logoutBtn").onclick = async () => {
+      await signOut(auth);
+      message.textContent = "👋 Logged out!";
+    };
   </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +14,16 @@
       align-items: center;
       height: 100vh;
     }
+
     .container {
       background: white;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       text-align: center;
       width: 320px;
     }
+
     input {
       width: 90%;
       padding: 10px;
@@ -29,6 +32,7 @@
       border-radius: 6px;
       font-size: 16px;
     }
+
     button {
       width: 45%;
       padding: 10px;
@@ -38,13 +42,31 @@
       color: white;
       cursor: pointer;
     }
-    #loginBtn { background: #007bff; }
-    #signupBtn { background: #28a745; }
-    #logoutBtn { background: #dc3545; width: 90%; }
-    button:hover { opacity: 0.9; }
-    #message { margin-top: 10px; font-weight: bold; }
+
+    #loginBtn {
+      background: #007bff;
+    }
+
+    #signupBtn {
+      background: #28a745;
+    }
+
+    #logoutBtn {
+      background: #dc3545;
+      width: 90%;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h2>🌤️ Login / Signup</h2>
@@ -61,10 +83,11 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-    import { firebaseConfig } from "./firebase-config.js";
+    import { auth } from "./firebase-config.js"; // Change this line
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    // Remove this line: const app = initializeApp(firebaseConfig);
+    // Remove this line: const auth = getAuth(app);
+
     const email = document.getElementById("email");
     const password = document.getElementById("password");
     const message = document.getElementById("message");
@@ -95,4 +118,5 @@
     };
   </script>
 </body>
+
 </html>
